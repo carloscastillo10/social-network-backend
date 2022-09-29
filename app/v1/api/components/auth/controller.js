@@ -1,5 +1,6 @@
+const auth = require('../../../auth');
+const bcrypt = require('bcrypt');
 const table = 'auth';
-const auth = require('../../../auth')
 
 class AuthController {
     constructor(injectedStore) {
@@ -17,15 +18,16 @@ class AuthController {
         if (!user) {
             throw new Error('User not found');
         }
+        const isMatch = await bcrypt.compare(password, user.password);
 
-        if (user.password !== password) {
+        if (!isMatch) {
             throw new Error('Invalid data');
         }
 
         return auth.singToken(user);
     }
 
-    upsert(data) {
+    async upsert(data) {
         const authData = {
             id: data.id,
         };
@@ -35,7 +37,7 @@ class AuthController {
         }
 
         if (data.password) {
-            authData.password = data.password;
+            authData.password = await bcrypt.hash(data.password, 10);
         }
 
         return this.store.upsert(table, authData);

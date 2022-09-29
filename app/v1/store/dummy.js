@@ -9,7 +9,7 @@ const database = {
 
 class DummyStore {
     async list(table) {
-        return await database[table] || [];
+        return (await database[table]) || [];
     }
 
     async get(table, id) {
@@ -23,18 +23,19 @@ class DummyStore {
         }
 
         database[table].push(data);
-
     }
 
     async remove(table, id) {
         return true;
     }
 
-    async query(table, dataQuery){
+    async query(table, dataQuery) {
         let collection = await this.list(table);
-        let keys = Object.keys(dataQuery)
-        let key = keys[0]
-        return collection.filter((item) => item[key] === dataQuery[key])[0] || null;
+        let keys = Object.keys(dataQuery);
+        let key = keys[0];
+        return (
+            collection.filter((item) => item[key] === dataQuery[key])[0] || null
+        );
     }
 }
 

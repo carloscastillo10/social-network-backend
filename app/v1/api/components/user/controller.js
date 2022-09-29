@@ -1,6 +1,6 @@
-const table = 'user';
 const auth = require('../auth')
 const uuid = require('uuid');
+const table = 'user';
 
 class UserController {
     constructor(injectedStore) {
