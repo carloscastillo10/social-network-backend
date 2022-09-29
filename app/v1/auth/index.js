@@ -1,11 +1,12 @@
 const config = require('../config/config');
 const jwt = require('jsonwebtoken');
+const error = require('../utils/error')
 
 const check = {
     owner: (req, owner) => {
         const decodedUser = decodeHeader(req);
         if (decodedUser.id !== owner) {
-            throw new Error('Unauthorized');
+            throw error('Unauthorized', 401);
         }
     },
 };
