@@ -18,7 +18,12 @@ class DummyStore {
     }
 
     async upsert(table, data) {
-        return database[table].push(data);
+        if (!database[table]) {
+            database[table] = [];
+        }
+
+        database[table].push(data);
+
     }
 
     async remove(table, id) {

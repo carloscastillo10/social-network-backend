@@ -1,5 +1,6 @@
 const table = 'user';
 const uuid = require('uuid');
+const auth = require('../auth')
 
 class UserController {
     constructor(injectedStore) {
@@ -18,10 +19,10 @@ class UserController {
         return this.store.get(table, id);
     }
 
-    upsert(body) {
+    async upsert(body) {
         let userId = body.id;
 
-        if (!body.name) {
+        if (!body.name || !body.lastname || !body.username || !body.password) {
             return Promise.reject('Invalid data');
         }
         if (!userId) {
@@ -30,7 +31,16 @@ class UserController {
         const user = {
             id: userId,
             name: body.name,
+            lastname: body.lastname,
+            username: body.username,
+            password: body.password
         };
+
+        await auth.upsert({
+            id: user.id,
+            username: user.username,
+            password: user.password
+        })
 
         return this.store.upsert(table, user);
     }
