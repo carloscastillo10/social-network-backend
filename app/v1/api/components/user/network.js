@@ -1,10 +1,16 @@
 const controller = require('./index');
 const express = require('express');
 const response = require('../../../network/response');
+const authSecure = require('./secure')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', list);
+router.get('/:id', get);
+router.post('/', upsert);
+router.put('/', authSecure('update'), upsert);
+
+function list(req, res) {
     controller
         .list()
         .then((users) => {
@@ -13,9 +19,9 @@ router.get('/', (req, res) => {
         .catch((error) => {
             response.error(req, res, 500, error.message);
         });
-});
+}
 
-router.get('/:id', (req, res) => {
+function get(req, res) {
     controller
         .get(req.params.id)
         .then((user) => {
@@ -24,9 +30,9 @@ router.get('/:id', (req, res) => {
         .catch((error) => {
             response.error(req, res, 500, error.message);
         });
-});
+}
 
-router.post('/', (req, res) => {
+function upsert(req, res) {
     controller
         .upsert(req.body)
         .then((user) => {
@@ -35,6 +41,6 @@ router.post('/', (req, res) => {
         .catch((error) => {
             response.error(req, res, 500, error.message);
         });
-});
+}
 
 module.exports = router;
