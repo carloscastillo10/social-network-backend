@@ -24,7 +24,8 @@ class AuthController {
             throw new Error('Invalid data');
         }
 
-        return auth.singToken(user);
+        // Convert RowDataPacket to Object
+        return auth.singToken({...user});
     }
 
     async upsert(data) {
@@ -42,6 +43,7 @@ class AuthController {
 
         return this.store.upsert(table, authData);
     }
+
 }
 
 module.exports = AuthController;
