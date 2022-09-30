@@ -4,6 +4,7 @@ const config = require('../config/config');
 const errorHandler = require('../network/errors');
 const express = require('express');
 const userRouter = require('./components/user/network');
+const postRouter = require('./components/post/network');
 
 const app = express();
 app.use(bodyParser.json());
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 // ROUTER
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/posts', postRouter);
 
 // MIDDLEWARES
 app.use(errorHandler);
