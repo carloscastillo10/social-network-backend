@@ -4,6 +4,7 @@
 
 ## Management Microservices
 
+```bash
 $ # PM2 Microservices Management commands
 $ Install
 $ npm install pm2 -g
@@ -30,3 +31,4 @@ $ pm2 stop <microserviceID>
 $
 $ # Restart any microservice
 $ pm2 restart <microserviceID>
+```
