@@ -15,6 +15,9 @@ const config = {
         port: process.env.MYSQL_MICROSERVICE_PORT || 3001,
     },
     port: process.env.PORT || 3000,
+    postMicroservice: {
+        port: process.env.POST_MICROSERVICE_PORT || 3002
+    }
 };
 
 module.exports = config;
