@@ -1,6 +1,6 @@
 # SOCIAL NETWORK BACKEND
 
-## Repository of the backend of the project of an social network with node js
+Repository of the backend of the project of an social network with node js
 
 ## PM2 Microservices Management commands
 
