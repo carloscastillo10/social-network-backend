@@ -2,10 +2,10 @@
   "name": "social-network-backend",
   "version": "1.0.0",
   "description": "Repository of the backend of the project of an social network with node js",
-  "main": "app/v1/api/index.js",
+  "main": "app/v1/api/api-index.js",
   "scripts": {
-    "dev": "nodemon app/v1/api/index",
-    "start": "node app/v1/api/index",
+    "dev": "nodemon app/v1/api/api-index",
+    "start": "node app/v1/api/api-index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

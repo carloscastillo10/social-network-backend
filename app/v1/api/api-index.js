@@ -16,5 +16,5 @@ app.use('/api/v1/auth', authRouter);
 app.use(errorHandler);
 
 app.listen(config.port, () => {
-    console.log('listening on port ' + config.port);
+    console.log('Api listening on port ' + config.port);
 });
