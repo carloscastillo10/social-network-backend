@@ -11,7 +11,8 @@ const config = {
         database: process.env.DATABASE_NAME,
     },
     mysqlMicroService: {
-        port: process.env.MYSQL_MICROSERVICE_PORT || 3001
+        host: process.env.MYSQL_MICROSERVICE_HOST || 'localhost',
+        port: process.env.MYSQL_MICROSERVICE_PORT || 3001,
     },
     port: process.env.PORT || 3000,
 };
