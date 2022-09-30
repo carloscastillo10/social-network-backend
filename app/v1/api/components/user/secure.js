@@ -4,8 +4,12 @@ function checkAuth(action) {
     function middleware(req, res, next) {
         switch (action) {
             case 'update':
-                const owner = req.body.id;
-                auth.check.owner(req, owner);
+                auth.check.owner(req, req.body.id);
+                next();
+                break;
+
+            case 'follow':
+                auth.check.logged(req);
                 next();
                 break;
 

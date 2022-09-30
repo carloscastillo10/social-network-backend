@@ -43,6 +43,7 @@ class AuthController {
 
         return this.store.upsert(table, authData);
     }
+
 }
 
 module.exports = AuthController;

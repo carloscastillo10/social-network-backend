@@ -9,6 +9,9 @@ const check = {
             throw error('Unauthorized', 401);
         }
     },
+    logged: (req) => {
+        return decodeHeader(req);
+    },
 };
 
 function decodeHeader(req) {

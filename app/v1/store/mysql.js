@@ -48,7 +48,7 @@ class MysqlStore {
 
     async upsert(table, data) {
         const isRegistered = await this.get(table, data.id);
-        if (isRegistered.length  !== 0) {
+        if (isRegistered.length !== 0) {
             return this.update(table, data);
         }
 
@@ -85,10 +85,17 @@ class MysqlStore {
         });
     }
 
-    query(table, dataQuery) {
+    query(table, dataQuery, join) {
+        let joinQuery = '';
+        if (join) {
+            const key = Object.keys(join)[0];
+            const val = join[key];
+            joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
+        }
+
         return new Promise((resolve, reject) => {
             this.connection.query(
-                `SELECT * FROM ${table} WHERE ?`,
+                `SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`,
                 dataQuery,
                 (error, result) => {
                     if (error) {
