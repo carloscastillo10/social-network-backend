@@ -32,14 +32,13 @@ class UserController {
             id: userId,
             name: body.name,
             lastname: body.lastname,
-            username: body.username,
-            password: body.password
+            username: body.username
         };
 
         await auth.upsert({
             id: user.id,
             username: user.username,
-            password: user.password
+            password: body.password
         })
 
         return this.store.upsert(table, user);
