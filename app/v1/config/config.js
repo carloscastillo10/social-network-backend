@@ -10,6 +10,9 @@ const config = {
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
     },
+    mysqlMicroService: {
+        port: process.env.MYSQL_MICROSERVICE_PORT || 3001
+    },
     port: process.env.PORT || 3000,
 };
 
