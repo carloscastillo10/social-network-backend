@@ -2,11 +2,10 @@
 
 ## Repository of the backend of the project of an social network with node js
 
-## Management Microservices
+## PM2 Microservices Management commands
 
 ```bash
-$ # PM2 Microservices Management commands
-$ Install
+$ # Install PM2
 $ npm install pm2 -g
 $
 $ # View Logs
