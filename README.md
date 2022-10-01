@@ -21,6 +21,7 @@ $ # Start microservices
 $ pm2 start app/v1/api/api-index.js
 $ pm2 start app/v1/mysql-microservice/api/v1/mysql-index.js
 $ pm2 start app/v1/post-microservice/api/v1/post-index.js
+$ pm2 start app/v1/cache-microservice/api/v1/cache-index.js
 $
 $ # Stop all microservices
 $ pm2 stop all
