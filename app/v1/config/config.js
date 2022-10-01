@@ -1,6 +1,13 @@
 require('dotenv').config();
 
 const config = {
+    cacheMicroService: {
+        host: process.env.CACHE_MICROSERVICE_HOST || 'localhost',
+        port: process.env.CACHE_MICROSERVICE_PORT || 3003,
+        redis: {
+            dbUrl: process.env.REDIS_URL,
+        },
+    },
     env: process.env.NODE_ENV || 'dev',
     isProd: process.env.NODE_ENV === 'production',
     jwtAccessSecret: process.env.JWT_ACCESS_SECRET,
@@ -16,8 +23,8 @@ const config = {
     },
     port: process.env.PORT || 3000,
     postMicroservice: {
-        port: process.env.POST_MICROSERVICE_PORT || 3002
-    }
+        port: process.env.POST_MICROSERVICE_PORT || 3002,
+    },
 };
 
 module.exports = config;

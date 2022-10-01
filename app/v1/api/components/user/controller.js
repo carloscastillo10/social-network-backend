@@ -3,16 +3,29 @@ const uuid = require('uuid');
 const table = 'user';
 
 class UserController {
-    constructor(injectedStore) {
+    constructor(injectedStore, injectedCache) {
         this.store = injectedStore;
+        this.cache = injectedCache;
+
         if (!this.store) {
             const DummyStore = require('../../../store/dummy');
             this.store = new DummyStore();
         }
+
+        if (!this.cache) {
+            const DummyStore = require('../../../store/dummy');
+            this.cache = new DummyStore();
+        }
     }
 
-    list() {
-        return this.store.list(table);
+    async list() {
+        let users = await this.cache.list(table);
+        if (!users) {
+            users = await this.store.list(table);
+            this.cache.upsert(table, users);
+        }
+
+        return users;
     }
 
     get(id) {
@@ -45,7 +58,7 @@ class UserController {
     }
 
     follow(from, to) {
-        if (from === to){
+        if (from === to) {
             return Promise.reject('Invalid data');
         }
 
@@ -56,12 +69,12 @@ class UserController {
     }
 
     async following(user) {
-        const join = {}
+        const join = {};
         join[table] = 'user_to';
         const query = { user_from: user };
 
-		return await this.store.query(`${table}_follow`, query, join);
-	}
+        return await this.store.query(`${table}_follow`, query, join);
+    }
 }
 
 module.exports = UserController;
